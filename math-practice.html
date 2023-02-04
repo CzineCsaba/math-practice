@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Matek gyakorló</title>
+        <script src="math-practice.js"></script>
+    </head>
+    <body onload="onHtmlLoad()">
+        <header>
+            <h1>Matek gyakorló</h1>
+            <h2 id="subtitle">Összeadás</h2>
+        </header>
+        <section>
+            <h3>Beállítások</h3>
+            <p>
+                <label for="op">Művelet: </label>
+                <select name="op" id="op" onchange="onOperationChanged()">
+                    <option value="+">összeadás</option>
+                    <option value="-">kivonás</option>
+                    <option value="×">szorzás</option>
+                    <option value=":">osztás</option>
+                </select>
+            </p>
+            <p id="stepOverTenRow">
+                <label for="stepOverTenInput">Csak tizes átlépés:</label>
+                <input id="stepOverTenInput" name="stepOverTenInput" type="checkbox" value="false" onchange="clearExcercise()"/>
+            </p>
+            <p>Időmérés: <input id="measureTimeInput" type="checkbox" value="isMeasurementOn" onchange="clearExcercise()"/></p>
+            <p>Maximum <span id="maxValueName">összeg</span>: <input id="maxValueInput" type="number" value="50" onchange="onMaxValueChanged()">
+            <button type="button" onclick="createNewExcercise()">KEZDJÜK!</button>
+        </section>
+        <section>
+            <h3>Feladat</h3>
+            <p><span id="a"></span> <span id="operator"></span> <span id="b"></span></p>
+            <input id="result" type="number" value="">
+        </section>
+        <section>
+            <h3>Megoldások</h3>
+            <table id="solutions">
+                <thead>
+                    <th>
+                        <tr>
+                            <th>Feladat</th>
+                            <th>Eredmény</th>
+                            <th>Hiba</th>
+                            <th>Idő</th>
+                        </tr>
+                    </th>
+                </thead>
+                <tbody id="solutions-body">
+                </tbody>
+            </table>
+        </section>
+    </body>
+</html>
