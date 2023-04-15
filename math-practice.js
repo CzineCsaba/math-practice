@@ -3,6 +3,7 @@ var b;
 var operator = '+';
 var startTime = undefined;
 var maxValue = 50;
+var solutionCounter = 1;
 
 function onHtmlLoad() {
     subscribeEnter();
@@ -50,9 +51,11 @@ function generateAddition() {
 
 function generateSubstraction() {
     if (isStepOverTenChecked()) {
-        let c = getRandomNumber(2, maxValue - 11);
-        b = getRandomNumber(maxValue - c, 9);
-        a = b + c;
+        do {
+            let c = getRandomNumber(2, maxValue - 11);
+            b = getRandomNumber(maxValue - c, 9);
+            a = b + c;
+        } while(b % 10 <= a % 10);
     } else {
         let c = getRandomNumber(2, maxValue - 1);
         b = getRandomNumber(1, maxValue - c);
@@ -88,7 +91,7 @@ function isStepOverTenChecked() {
 }
 
 function generateMultiplication() {
-    b = getRandomNumber(1, 10);
+    b = getRandomNumber(2, 9);
     let maxA = Math.floor(maxValue / 10);
     a = getRandomNumber(2, maxA);
 }
@@ -149,19 +152,20 @@ function checkWithCurrentValue(expectedValue) {
         duration = Math.floor(durationInMs / 1000);
     }
 
-    let newSolutionRows = soltuionsBodyElement.innerHTML;
+    let solutionRows = soltuionsBodyElement.innerHTML;
     if (current == expectedValue) {
-        newSolutionRows =
-            '<tr><td>' + excercise + '</td><td>Helyes</td><td></td><td>' + duration + '</td></tr>' +
-            newSolutionRows;
+        solutionRows =
+            '<tr><td>' + solutionCounter++ + '</td><td>' + excercise + '</td><td>Helyes</td><td></td><td>' + duration + '</td></tr>' +
+            solutionRows;
         
     } else {
-        newSolutionRows =
-            '<tr><td>' + excercise + '</td><td>Hibás</td><td>Rossz eredmény: ' + current + '</td><td>' + duration + '</td></tr>' +
-            newSolutionRows;
+        solutionRows =
+            '<tr><td>' + solutionCounter++ + '</td><td>' + excercise + '</td><td>Hibás</td><td>Rossz eredmény: '
+            + current + '</td><td>' + duration + '</td></tr>'
+            + solutionRows;
     }
 
-    soltuionsBodyElement.innerHTML = newSolutionRows;
+    soltuionsBodyElement.innerHTML = solutionRows;
 }
 
 function updateMaximumValueName(newOperator) {
